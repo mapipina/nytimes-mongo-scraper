@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 3000;
 const app = express();
 const router = express.Router();
+require("./config/routes")(router);
 app.use(express.static(__dirname + "/public"));
 
 app.engine("handlebars", exphbs({
