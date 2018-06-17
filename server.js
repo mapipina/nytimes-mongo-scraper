@@ -1,25 +1,36 @@
-// Dependencies
-var express = require("express");
-var exphbs  = require("express-handlebars");
-var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
-var request = require("request");
+const express = require("express");
+const mongoose = require("mongoose");
+const exphbs = require("express-handlebars");
+const bodyParser = require("body-parser");
+const PORT = process.env.PORT || 3000;
+const app = express();
+const router = express.Router();
+app.use(express.static(__dirname + "/public"));
 
-// Scraping dependencies
-// var axios = require("axios");
-var cheerio = require("cheerio");
+app.engine("handlebars", exphbs({
+    defaultLayout: "main"
+}));
 
-var db = require("./models");
+app.set("view engine", "handlebars");
 
-var PORT = process.env.PORT | 3000;
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 
-// Initialize Express
-var app = express();
+app.use(router);
 
+var db = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+mongoose.connect(db, function(error) {
+    if (error) {
+        console.log(error);
+    }
 
+    else {
+        console.log("mongoose connection was succesful");
+    }
+});
 
-// Connect to the Mongo DB
-mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI);
+app.listen(PORT, function() {
+    console.log("Listening on port: " + PORT);
+});
