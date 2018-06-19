@@ -10,12 +10,12 @@ function scrape (cb) {
 			var sum = $(this).children(".summary").text().trim();
 
 			if(head && sum) {
-				var headNeat = head.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
-				var sumNeat = sum.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
+				var headClean = head.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
+				var sumClean = sum.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
 
 				var dataToAdd = {
-					headline: headNeat,
-					summary: sumNeat
+					headline: headClean,
+					summary: sumClean
 				};
 				articles.push(dataToAdd);
 			}
