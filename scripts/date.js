@@ -3,7 +3,7 @@ function createDate () {
 	var changedDate = "";
 
 	changedDate += (d.getMonth() + 1) + "_";
-	changedDate += d.getMonth() + "_";
+	changedDate += d.getDate() + "_";
 	changedDate += d.getFullYear();
 
 	return changedDate;
