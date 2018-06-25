@@ -54,4 +54,16 @@ module.exports = function(router) {
 			res.json(data);
 		});
 	});
+	router.delete("/api/notes/:id", function(req, res){
+		var query = {};
+		query._id = req.params.id;
+		noteCont.delete(query, function(err, data){
+			res.json(data);
+		});
+	});
+	router.post("/api/notes", function(req, res){
+		noteCont.save(req.body, function(data){
+			res.json(data);
+		});
+	});
 }
